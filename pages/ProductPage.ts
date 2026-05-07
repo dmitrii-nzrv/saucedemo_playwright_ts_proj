@@ -13,4 +13,33 @@ export class ProductPage {
     await this.page.click(ProductPageLocators.settingIcon);
     await this.page.click(ProductPageLocators.aboutLink);
   }
+
+  async validateAllProductsDisplayed() {
+    const names = await this.page.locator(ProductPageLocators.productNames).allTextContents();
+    const desc = await this.page.locator(ProductPageLocators.productDesc).allTextContents();
+    const price = await this.page.locator(ProductPageLocators.productPrices).allTextContents();
+    const buttonCount = await this.page.locator(ProductPageLocators.addToCartButtons).count();
+
+    if (names.length === 0) throw new Error('No products found');
+
+    if (
+      names.length !== desc.length ||
+      names.length !== price.length ||
+      names.length !== buttonCount
+    )
+      throw new Error('Mismatch between the product details');
+  }
+
+  async addFirstProductToCart() {
+    await this.page.locator(ProductPageLocators.addToCartButtons).first().click();
+  }
+
+  async addAllProductsToCart() {
+    const buttons = this.page.locator(ProductPageLocators.addToCartButtons);
+    const count = await buttons.count();
+
+    for (let i = 0; i < count; i++) {
+      await buttons.nth(i).click();
+    }
+  }
 }

@@ -30,4 +30,10 @@ test.describe('Product Page validation', () => {
     await page.goBack();
     await expect(page.locator(ProductPageLocators.settingIcon)).toBeVisible();
   });
+
+  test('Validate Product Page', async ({ page }) => {
+    await productPage.validateAllProductsDisplayed();
+    await productPage.addFirstProductToCart();
+    await productPage.addAllProductsToCart();
+  });
 });
