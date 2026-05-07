@@ -42,4 +42,15 @@ export class ProductPage {
       await buttons.nth(i).click();
     }
   }
+
+  async addSpecificProductsToCart(productName: string[]) {
+    const addProducts = this.page.locator(ProductPageLocators.productNames);
+    const count = await addProducts.count();
+    for (let i = 0; i < count; i++) {
+      const name = await addProducts.nth(i).textContent();
+      if (name && productName.includes(name.trim())) {
+        await this.page.locator(ProductPageLocators.addToCartButtons).nth(i).click();
+      }
+    }
+  }
 }

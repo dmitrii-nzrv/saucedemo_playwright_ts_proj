@@ -4,7 +4,7 @@ import { ProductPage } from '../pages/ProductPage';
 import { LoginPage } from '../pages/LoginPage';
 import { LoginLocators } from '../locators/LoginLocators';
 import { ProductPageLocators } from '../locators/ProductPageLocators';
-
+import { productsToCart } from '../test-data/products';
 test.describe('Product Page validation', () => {
   let loginPage: LoginPage;
   let productPage: ProductPage;
@@ -35,5 +35,9 @@ test.describe('Product Page validation', () => {
     await productPage.validateAllProductsDisplayed();
     await productPage.addFirstProductToCart();
     await productPage.addAllProductsToCart();
+  });
+
+  test('Validate adding specific products to cart', async ({ page }) => {
+    await productPage.addSpecificProductsToCart(productsToCart);
   });
 });
