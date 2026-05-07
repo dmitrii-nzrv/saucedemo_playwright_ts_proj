@@ -8,4 +8,9 @@ export const ProductPageLocators = {
   productDesc: '.inventory_item_desc',
   productPrices: '.inventory_item_price',
   addToCartButtons: '.btn.btn_small.btn_inventory',
+  filterDropdown: '.product_sort_container',
+  filterByNameAtoZ: 'option[value="az"]',
+  filterByNameZtoA: 'option[value="za"]',
+  filterByPriceLtoH: 'option[value="lohi"]',
+  filterByPriceHtoL: 'option[value="hilo"]',
 };
