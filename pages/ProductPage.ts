@@ -53,4 +53,29 @@ export class ProductPage {
       }
     }
   }
+
+  async filterByNameAtoZ() {
+    await this.page.selectOption(ProductPageLocators.filterDropdown, 'az');
+  }
+
+  async filterByNameZtoA() {
+    await this.page.selectOption(ProductPageLocators.filterDropdown, 'za');
+  }
+
+  async filterByPriceLtoH() {
+    await this.page.selectOption(ProductPageLocators.filterDropdown, 'lohi');
+  }
+
+  async filterByPriceHtoL() {
+    await this.page.selectOption(ProductPageLocators.filterDropdown, 'hilo');
+  }
+
+  async getProductNames() {
+    return await this.page.locator(ProductPageLocators.productNames).allTextContents();
+  }
+
+  async getProductPrices() {
+    const prices = await this.page.locator(ProductPageLocators.productPrices).allTextContents();
+    return prices.map((price) => parseFloat(price.replace('$', '')));
+  }
 }

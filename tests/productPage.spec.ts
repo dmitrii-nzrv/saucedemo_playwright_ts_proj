@@ -40,4 +40,32 @@ test.describe('Product Page validation', () => {
   test('Validate adding specific products to cart', async ({ page }) => {
     await productPage.addSpecificProductsToCart(productsToCart);
   });
+
+  test('Filter by name A to Z', async () => {
+    await productPage.filterByNameAtoZ();
+    const names = await productPage.getProductNames();
+    const sorted = [...names].sort();
+    expect(names).toEqual(sorted);
+  });
+
+  test('Filter by name Z to A', async () => {
+    await productPage.filterByNameZtoA();
+    const names = await productPage.getProductNames();
+    const sorted = [...names].sort().reverse();
+    expect(names).toEqual(sorted);
+  });
+
+  test.only('Filter by price Low to High', async () => {
+    await productPage.filterByPriceLtoH();
+    const prices = await productPage.getProductPrices();
+    const sorted = [...prices].sort((a, b) => a - b);
+    expect(prices).toEqual(sorted);
+  });
+
+  test.only('Filter by price High to Low', async () => {
+    await productPage.filterByPriceHtoL();
+    const prices = await productPage.getProductPrices();
+    const sorted = [...prices].sort((a, b) => b - a);
+    expect(prices).toEqual(sorted);
+  });
 });
