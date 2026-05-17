@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
 import { ProductPageLocators } from '../locators/ProductPageLocators';
+import { cartPageLocators } from '../locators/CartPageLocators';
 
 export class ProductPage {
   constructor(private page: Page) {}
@@ -77,5 +78,47 @@ export class ProductPage {
   async getProductPrices() {
     const prices = await this.page.locator(ProductPageLocators.productPrices).allTextContents();
     return prices.map((price) => parseFloat(price.replace('$', '')));
+  }
+
+  async clickOnCartLink() {
+    await this.page.locator(ProductPageLocators.cartLink).click();
+  }
+
+  async getFirstProductDetails() {
+    const name = await this.page.locator(cartPageLocators.productNames).first().textContent();
+    const description = await this.page.locator(cartPageLocators.productDesc).first().textContent();
+    const price = await this.page.locator(cartPageLocators.productPrices).first().textContent();
+
+    return {
+      name: name?.trim(),
+      description: description?.trim(),
+      price: price?.trim(),
+    };
+  }
+
+  async getAllProductDetails() {
+    const allNames = await this.page.locator(cartPageLocators.productNames).allTextContents();
+    const allDescriptions = await this.page.locator(cartPageLocators.productDesc).allTextContents();
+    const allPrices = await this.page.locator(cartPageLocators.productPrices).allTextContents();
+
+    const allProducts = allNames.map((_, i) => ({
+      name: allNames[i].trim(),
+      description: allDescriptions[i].trim(),
+      price: allPrices[i].trim(),
+    }));
+    return allProducts;
+  }
+
+  async getSpecificProductDetails(productName: string[]) {
+    const allNames = await this.page.locator(cartPageLocators.productNames).allTextContents();
+    const allDescriptions = await this.page.locator(cartPageLocators.productDesc).allTextContents();
+    const allPrices = await this.page.locator(cartPageLocators.productPrices).allTextContents();
+
+    const allCartProducts = allNames.map((_, i) => ({
+      name: allNames[i].trim(),
+      description: allDescriptions[i].trim(),
+      price: allPrices[i].trim(),
+    }));
+    return allCartProducts;
   }
 }

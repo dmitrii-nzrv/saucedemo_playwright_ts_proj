@@ -13,4 +13,5 @@ export const ProductPageLocators = {
   filterByNameZtoA: 'option[value="za"]',
   filterByPriceLtoH: 'option[value="lohi"]',
   filterByPriceHtoL: 'option[value="hilo"]',
+  cartLink: '.shopping_cart_link',
 };
