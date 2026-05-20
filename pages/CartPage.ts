@@ -28,4 +28,7 @@ export class CartPage {
     }));
     return allProducts;
   }
+  async removeFirstProduct() {
+    await this.page.locator(cartPageLocators.removeButton).click();
+  }
 }
