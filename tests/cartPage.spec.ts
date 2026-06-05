@@ -21,4 +21,24 @@ test.describe('Cart Page validation', () => {
     await loginPage.login(USERNAME, PASSWORD);
     await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
   });
+
+  test('Validate Cart Page URL and UI elements', async ({ page }) => {
+    await productPage.addFirstProductToCart();
+    await productPage.clickOnCartLink();
+    expect(page).toHaveURL('https://www.saucedemo.com/cart.html');
+    const ui = cartPage.getCartPageElements();
+    expect((await ui).cartTitle).toBeVisible();
+    expect((await ui).shoppingCart).toBeVisible();
+    expect((await ui).checkoutButton).toBeVisible();
+  });
+
+  test('Validate Continue Shopping Functionality ', async ({ page }) => {});
+
+  test('Validate Single Product in the Cart Page', async ({ page }) => {});
+
+  test('Validate all products added to the Cart Page', async ({ page }) => {});
+
+  test('Validate Specific Products added to the Cart Page', async ({ page }) => {});
+
+  test('Validate Remove Product Functionality', async ({ page }) => {});
 });
