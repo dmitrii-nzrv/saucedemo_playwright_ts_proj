@@ -32,7 +32,12 @@ test.describe('Cart Page validation', () => {
     expect((await ui).checkoutButton).toBeVisible();
   });
 
-  test('Validate Continue Shopping Functionality ', async ({ page }) => {});
+  test('Validate Continue Shopping Functionality', async ({ page }) => {
+    await productPage.addFirstProductToCart();
+    await productPage.clickOnCartLink();
+    await cartPage.clickOnContinueShopping();
+    await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+  });
 
   test('Validate Single Product in the Cart Page', async ({ page }) => {});
 
