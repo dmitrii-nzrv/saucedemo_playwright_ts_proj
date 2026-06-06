@@ -39,7 +39,7 @@ test.describe('Cart Page validation', () => {
     await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
   });
 
-  test.only('Validate First Product in the Cart Page', async ({ page }) => {
+  test('Validate First Product in the Cart Page', async ({ page }) => {
     const firstProduct = await productPage.getFirstProductDetails();
     await productPage.addFirstProductToCart();
     await productPage.clickOnCartLink();
@@ -48,7 +48,14 @@ test.describe('Cart Page validation', () => {
     expect(cartProducts[0]).toEqual(firstProduct);
   });
 
-  test('Validate all products added to the Cart Page', async ({ page }) => {});
+  test.only('Validate all products added to the Cart Page', async ({ page }) => {
+    const allProductDetails = await productPage.getAllProductDetails();
+    await productPage.addAllProductsToCart();
+    await productPage.clickOnCartLink();
+
+    const cartProducts = await cartPage.getCartProducts();
+    expect(cartProducts).toEqual(allProductDetails);
+  });
 
   test('Validate Specific Products added to the Cart Page', async ({ page }) => {});
 
