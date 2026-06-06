@@ -119,6 +119,6 @@ export class ProductPage {
       description: allDescriptions[i].trim(),
       price: allPrices[i].trim(),
     }));
-    return allCartProducts;
+    return allCartProducts.filter((p) => productName.includes(p.name));
   }
 }
