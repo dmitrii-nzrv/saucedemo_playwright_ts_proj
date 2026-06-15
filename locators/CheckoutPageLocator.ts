@@ -4,5 +4,5 @@ export const CheckoutPageLocators = {
   continueButton: '#continue',
   firstName: '#first-name',
   lastName: '#last-name',
-  postalCode: '$postal-code',
+  postalCode: '#postal-code',
 };
