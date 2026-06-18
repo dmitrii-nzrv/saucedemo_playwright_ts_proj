@@ -13,18 +13,20 @@ export class CheckoutPage {
   }
 
   async fillCheckoutDetails(firstName: string, lastName: string, postalCode: string) {
-    await this.page.fill(CheckoutPageLocators.firstName, firstName)
-    await this.page.fill(CheckoutPageLocators.lastName, lastName)
-        await this.page.fill(CheckoutPageLocators.postalCode, postalCode)
-
-
+    await this.page.fill(CheckoutPageLocators.firstName, firstName);
+    await this.page.fill(CheckoutPageLocators.lastName, lastName);
+    await this.page.fill(CheckoutPageLocators.postalCode, postalCode);
   }
 
   async clickCancel() {
-    await this.page.click(CheckoutPageLocators.cancelButton)
+    await this.page.click(CheckoutPageLocators.cancelButton);
   }
 
   async clickOnContinue() {
-    await this.page.click(CheckoutPageLocators.continueButton)
+    await this.page.click(CheckoutPageLocators.continueButton);
+  }
+
+  async getErrorMessage() {
+    return await this.page.locator(CheckoutPageLocators.errorMessage).textContent();
   }
 }

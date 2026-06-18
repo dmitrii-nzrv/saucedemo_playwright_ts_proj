@@ -50,4 +50,11 @@ test.describe('Cart Page validation', () => {
     );
     await checkoutPage.clickOnContinue();
   });
+
+  test.only('Validate the error when clicking the continue with no data', async ({ page }) => {
+    await cartPage.clickCheckoutButton();
+    await checkoutPage.clickOnContinue();
+    const error = await checkoutPage.getErrorMessage();
+    expect(error?.trim()).toBe('Error: First Name is required');
+  });
 });
